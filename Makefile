@@ -51,7 +51,7 @@ test: .env
 ## =====================
 
 create_environment:
-	@"${PACT_CLI}" broker create-environment --name production --production
+	@"${PACT_CLI}" broker create-environment --name evanbb-production --production
 
 deploy: deploy_app record_deployment
 
@@ -63,16 +63,16 @@ can_i_deploy: .env
 	@"${PACT_CLI}" broker can-i-deploy \
 	  --pacticipant ${PACTICIPANT} \
 	  --version ${GIT_COMMIT} \
-	  --to-environment production \
+	  --to-environment evanbb-production \
 	  --retry-while-unknown 0 \
 	  --retry-interval 10
 
 deploy_app:
 	@echo "\n========== STAGE: deploy ==========\n"
-	@echo "Deploying to production"
+	@echo "Deploying to evanbb-production"
 
 record_deployment: .env
-	@"${PACT_CLI}" broker record-deployment --pacticipant ${PACTICIPANT} --version ${GIT_COMMIT} --environment production
+	@"${PACT_CLI}" broker record-deployment --pacticipant ${PACTICIPANT} --version ${GIT_COMMIT} --environment evanbb-production
 
 ## =====================
 ## Pactflow set up tasks
